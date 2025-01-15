@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Web Design</title>
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            scroll-behavior: smooth; /* Smooth scrolling for navigation */
+        }
+
+        header, footer {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ff9800;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            padding: 40px;
+            flex: 1;
+        }
+
+        .main-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        section {
+            padding: 40px 20px;
+            margin: 0 auto;
+            max-width: 1200px;
+            opacity: 0; /* Start hidden */
+            transform: translateY(20px); /* Start with offset */
+            transition: opacity 0.5s, transform 0.5s;
+        }
+
+        section.visible {
+            opacity: 1; /* Fully visible */
+            transform: translateY(0); /* No offset */
+        }
+
+        footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        footer a {
+            color: #ff9800;
+            text-decoration: none;
+        }
+
+        /* Back-to-Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            text-align: center;
+            cursor: pointer;
+            display: none; /* Hidden by default */
+            z-index: 1000;
+            transition: background-color 0.3s;
+        }
+
+        .back-to-top:hover {
+            background-color: #ff9800;
+        }
+
+        /* Mobile Menu Styles */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 4px 0;
+            transition: transform 0.3s;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: 60px;
+            right: 20px;
+            background-color: #333;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .mobile-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 0;
+            border-bottom: 1px solid #555;
+        }
+
+        .mobile-menu a:last-child {
+            border-bottom: none;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+        }
+
+        @media (min-width: 601px) and (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* Bonus: Transition for smooth resizing */
+        header, footer, .main-content {
+            transition: all 0.3s ease;
+        }
+    </style>
+    <script>
+        window.addEventListener('scroll', () => {
+            const backToTopButton = document.querySelector('.back-to-top');
+            if (window.scrollY > 300) {
+                backToTopButton.style.display = 'block';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburger = document.querySelector('.hamburger');
+            const mobileMenu = document.querySelector('.mobile-menu');
+
+            hamburger.addEventListener('click', () => {
+                mobileMenu.style.display = mobileMenu.style.display === 'flex' ? 'none' : 'flex';
+            });
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('section').forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">Logo</div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <div class="hamburger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="mobile-menu">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </header>
+
+    <main>
+        <div id="home" class="main-content">
+            <div class="text-content">
+                <h1>Welcome to Our Website</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac diam vehicula, vulputate nulla a, convallis erat.</p>
+            </div>
+            <div class="image-content">
+                <img src="pic.avif" alt="Placeholder Image">
+            </div>
+        </div>
+
+        <section id="about">
+            <h2>About Us</h2>
+            <p>We are committed to delivering exceptional quality and fostering innovation. Our mission is to provide solutions that drive progress and create lasting value for our clients.</p>
+            <p>Our vision is to become a leader in our field by embracing technology and prioritizing customer satisfaction.</p>
+        </section>
+
+        <section id="services">
+            <h2>Our Services</h2>
+            <p>We offer a range of services, including:</p>
+            <ul>
+                <li>Web Development</li>
+                <li>Mobile App Design</li>
+                <li>Digital Marketing</li>
+                <li>IT Consulting</li>
+            </ul>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <p>We would love to hear from you! Reach out to us through the following channels or fill out the form below:</p>
+            <ul>
+                <li>Email: contact@yourcompany.com</li>
+                <li>Phone: +123-456-7890</li>
+                <li>Follow us on social media: <a href="#">Facebook</a>, <a href="#">Twitter</a>, <a href="#">Instagram</a></li>
+            </ul>
+            <form action="#" method="POST" style="margin-top: 20px;">
+                <label for="name">Your Name:</label><br>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required style="width: 100%; padding: 10px; margin: 10px 0;"><br>
+
+                <label for="email">Your Email:</label><br>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required style="width: 100%; padding: 10px; margin: 10px 0;"><br>
+
+                <label for="message">Your Message:</label><br>
+                <textarea id="message" name="message" placeholder="Enter your message" required style="width: 100%; padding: 10px; margin: 10px 0;" rows="5"></textarea><br>
+
+                <button type="submit" style="padding: 10px 20px; background-color: #333; color: white; border: none; cursor: pointer;">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <div class="back-to-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">&#8679;</div>
+
+    <footer>
+        <div>&copy; 2025 Your Company</div>
+        <div>
+            <a href="#">Facebook</a> |
+            <a href="#">Twitter</a> |
+            <a href="#">Instagram</a>
+        </div>
+    </footer>
+</body>
+</html>

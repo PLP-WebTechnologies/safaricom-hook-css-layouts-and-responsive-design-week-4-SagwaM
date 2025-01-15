@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Web Design</title>
+    <style>
+        /* General Styles */
+        body {
+            margin: 0; /* Remove default margin */
+            font-family: Arial, sans-serif; /* Use a clean, modern font */
+            display: flex;
+            flex-direction: column; /* Ensure footer stays at the bottom */
+            min-height: 100vh;
+        }
+
+        header, footer {
+            background-color: #333; /* Dark background for header and footer */
+            color: white; /* White text for contrast */
+            padding: 10px; /* Add padding for spacing */
+        }
+
+        header {
+            display: flex; /* Use Flexbox for layout */
+            justify-content: space-between; /* Space out logo and navigation */
+            align-items: center; /* Align items vertically */
+        }
+
+        nav {
+            display: flex; /* Flexbox for navigation links */
+            gap: 15px; /* Add space between links */
+        }
+
+        nav a {
+            color: white; /* White text for links */
+            text-decoration: none; /* Remove underline from links */
+            transition: color 0.3s; /* Smooth transition for hover effect */
+        }
+
+        nav a:hover {
+            color: #ff9800; /* Highlight color on hover */
+        }
+
+        .main-content {
+            display: grid; /* Use Grid for the main content layout */
+            grid-template-columns: 1fr 1fr; /* Two equal columns */
+            gap: 20px; /* Add space between columns */
+            padding: 20px; /* Add padding around content */
+            flex: 1; /* Allow main content to expand and push footer to bottom */
+        }
+
+        .main-content img {
+            max-width: 100%; /* Ensure image scales within container */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 8px; /* Add rounded corners */
+        }
+
+        footer {
+            display: flex; /* Flexbox for footer layout */
+            justify-content: space-between; /* Space out content */
+            align-items: center; /* Align items vertically */
+            margin-top: auto; /* Push footer to the bottom of the page */
+        }
+
+        footer a {
+            color: #ff9800; /* Use highlight color for links */
+            text-decoration: none; /* Remove underline */
+        }
+
+        /* Media Queries */
+        @media (max-width: 600px) {
+            header, footer {
+                flex-direction: column; /* Stack elements vertically on small screens */
+                align-items: center; /* Center align elements */
+            }
+
+            nav {
+                flex-wrap: wrap; /* Allow links to wrap on small screens */
+                justify-content: center;
+                gap: 10px; /* Reduce gap for smaller screens */
+            }
+
+            .main-content {
+                grid-template-columns: 1fr; /* Single column layout */
+            }
+        }
+
+        @media (min-width: 601px) and (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr; /* Stack columns vertically for medium screens */
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr 1fr; /* Restore two-column layout for large screens */
+            }
+        }
+
+        /* Bonus: Transition for smooth resizing */
+        header, footer, .main-content {
+            transition: all 0.3s ease; /* Smooth transitions for layout changes */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Logo</div> <!-- Placeholder for company logo -->
+        <nav>
+            <a href="#home">Home</a> <!-- Navigation link for Home -->
+            <a href="#about">About</a> <!-- Navigation link for About -->
+            <a href="#services">Services</a> <!-- Navigation link for Services -->
+            <a href="#contact">Contact</a> <!-- Navigation link for Contact -->
+        </nav>
+    </header>
+
+    <main>
+        <div id="home" class="main-content">
+            <div class="text-content">
+                <h1>Welcome to Our Website</h1> <!-- Main heading -->
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac diam vehicula, vulputate nulla a, convallis erat.</p> <!-- Sample paragraph -->
+            </div>
+            <div class="image-content">
+                <img src="pic.avif" alt="Placeholder Image"> <!-- Sample image with placeholder URL -->
+            </div>
+        </div>
+
+        <section id="about">
+            <h2>About Us</h2>
+            <p>Learn more about our mission and vision.</p>
+        </section>
+
+        <section id="services">
+            <h2>Our Services</h2>
+            <p>We offer a range of services to meet your needs.</p>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <p>Get in touch with us through email or social media.</p>
+        </section>
+    </main>
+
+    <footer>
+        <div>&copy; 2025 Your Company</div> <!-- Copyright notice -->
+        <div>
+            <a href="#">Facebook</a> | <!-- Link to Facebook -->
+            <a href="#">Twitter</a> | <!-- Link to Twitter -->
+            <a href="#">Instagram</a> <!-- Link to Instagram -->
+        </div>
+    </footer>
+</body>
+</html>
